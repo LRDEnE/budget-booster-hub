@@ -3,11 +3,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Calculator, DollarSign } from 'lucide-react';
+import { Calculator, Euro } from 'lucide-react';
 
 export const MortgageCalculator = () => {
-  const [loanAmount, setLoanAmount] = useState(300000);
-  const [interestRate, setInterestRate] = useState(6.5);
+  const [loanAmount, setLoanAmount] = useState(350000);
+  const [interestRate, setInterestRate] = useState(3.8);
   const [loanTerm, setLoanTerm] = useState(30);
   const [monthlyPayment, setMonthlyPayment] = useState(0);
   const [totalInterest, setTotalInterest] = useState(0);
@@ -38,21 +38,21 @@ export const MortgageCalculator = () => {
         <div className="mx-auto mb-2 w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center">
           <Calculator className="w-6 h-6 text-primary-foreground" />
         </div>
-        <CardTitle>Mortgage Calculator</CardTitle>
-        <CardDescription>Calculate your monthly payments</CardDescription>
+        <CardTitle>Mortgage Calculator (EU)</CardTitle>
+        <CardDescription>Calculate your monthly payments in Euros</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="loan-amount">Loan Amount</Label>
+          <Label htmlFor="loan-amount">Loan Amount (€)</Label>
           <div className="relative">
-            <DollarSign className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+            <Euro className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
             <Input
               id="loan-amount"
               type="number"
               value={loanAmount}
               onChange={(e) => setLoanAmount(Number(e.target.value))}
               className="pl-10"
-              placeholder="300,000"
+              placeholder="350,000"
             />
           </div>
         </div>
@@ -65,7 +65,7 @@ export const MortgageCalculator = () => {
             step="0.1"
             value={interestRate}
             onChange={(e) => setInterestRate(Number(e.target.value))}
-            placeholder="6.5"
+            placeholder="3.8"
           />
         </div>
 
@@ -84,13 +84,13 @@ export const MortgageCalculator = () => {
           <div className="flex justify-between items-center">
             <span className="text-sm font-medium">Monthly Payment:</span>
             <span className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-              ${monthlyPayment.toLocaleString('en-US', { maximumFractionDigits: 0 })}
+              €{monthlyPayment.toLocaleString('de-DE', { maximumFractionDigits: 0 })}
             </span>
           </div>
           <div className="flex justify-between items-center">
             <span className="text-sm text-muted-foreground">Total Interest:</span>
             <span className="text-sm font-medium">
-              ${totalInterest.toLocaleString('en-US', { maximumFractionDigits: 0 })}
+              €{totalInterest.toLocaleString('de-DE', { maximumFractionDigits: 0 })}
             </span>
           </div>
         </div>

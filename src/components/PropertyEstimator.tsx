@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Home, MapPin } from 'lucide-react';
+import { Home, MapPin, Euro } from 'lucide-react';
 
 export const PropertyEstimator = () => {
   const [squareFootage, setSquareFootage] = useState('');
@@ -21,31 +21,36 @@ export const PropertyEstimator = () => {
     const beds = Number(bedrooms);
     const baths = Number(bathrooms);
 
-    // Base price per square foot by location
+    // Base price per square meter by location in Germany
     const locationMultipliers: { [key: string]: number } = {
-      'urban': 200,
-      'suburban': 150,
-      'rural': 100
+      'munich': 8000,      // €8,000/m² in Munich
+      'frankfurt': 7000,   // €7,000/m² in Frankfurt
+      'hamburg': 5500,     // €5,500/m² in Hamburg
+      'berlin': 5000,      // €5,000/m² in Berlin
+      'cologne': 4500,     // €4,500/m² in Cologne
+      'stuttgart': 6000,   // €6,000/m² in Stuttgart
+      'dusseldorf': 5500,  // €5,500/m² in Düsseldorf
+      'other': 3500        // €3,500/m² in other cities
     };
 
     // Property type multipliers
     const typeMultipliers: { [key: string]: number } = {
-      'single-family': 1.0,
-      'condo': 0.8,
-      'townhouse': 0.9,
-      'luxury': 1.5
+      'apartment': 1.0,
+      'house': 0.9,
+      'penthouse': 1.4,
+      'maisonette': 1.1
     };
 
-    const basePricePerSqft = locationMultipliers[location] || 150;
+    const basePricePerSqm = locationMultipliers[location] || 4000;
     const typeMultiplier = typeMultipliers[propertyType] || 1.0;
 
-    let baseValue = sqft * basePricePerSqft * typeMultiplier;
+    let baseValue = sqft * basePricePerSqm * typeMultiplier;
 
-    // Bedroom and bathroom bonuses
-    baseValue += (beds - 2) * 15000; // Bonus/penalty for bedrooms above/below 2
-    baseValue += (baths - 1) * 10000; // Bonus/penalty for bathrooms above/below 1
+    // Bedroom and bathroom bonuses (European standards)
+    baseValue += (beds - 2) * 25000; // Bonus/penalty for bedrooms above/below 2
+    baseValue += (baths - 1) * 15000; // Bonus/penalty for bathrooms above/below 1
 
-    setEstimatedValue(Math.max(50000, baseValue));
+    setEstimatedValue(Math.max(100000, baseValue));
   };
 
   return (
@@ -54,18 +59,18 @@ export const PropertyEstimator = () => {
         <div className="mx-auto mb-2 w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center">
           <Home className="w-6 h-6 text-accent" />
         </div>
-        <CardTitle>Property Estimator</CardTitle>
-        <CardDescription>Get an estimated property value</CardDescription>
+        <CardTitle>Property Estimator (DE/EU)</CardTitle>
+        <CardDescription>Get estimated property value in Germany</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="square-footage">Square Footage</Label>
+          <Label htmlFor="square-footage">Square Meters</Label>
           <Input
             id="square-footage"
             type="number"
             value={squareFootage}
             onChange={(e) => setSquareFootage(e.target.value)}
-            placeholder="2,500"
+            placeholder="120"
           />
         </div>
 
@@ -94,15 +99,20 @@ export const PropertyEstimator = () => {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="location">Location Type</Label>
+          <Label htmlFor="location">Location (Germany)</Label>
           <Select value={location} onValueChange={setLocation}>
             <SelectTrigger>
-              <SelectValue placeholder="Select location" />
+              <SelectValue placeholder="Select German city" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="urban">Urban/City Center</SelectItem>
-              <SelectItem value="suburban">Suburban</SelectItem>
-              <SelectItem value="rural">Rural</SelectItem>
+              <SelectItem value="munich">München (Munich)</SelectItem>
+              <SelectItem value="frankfurt">Frankfurt am Main</SelectItem>
+              <SelectItem value="hamburg">Hamburg</SelectItem>
+              <SelectItem value="berlin">Berlin</SelectItem>
+              <SelectItem value="cologne">Köln (Cologne)</SelectItem>
+              <SelectItem value="stuttgart">Stuttgart</SelectItem>
+              <SelectItem value="dusseldorf">Düsseldorf</SelectItem>
+              <SelectItem value="other">Other German City</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -114,10 +124,10 @@ export const PropertyEstimator = () => {
               <SelectValue placeholder="Select property type" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="single-family">Single Family Home</SelectItem>
-              <SelectItem value="condo">Condominium</SelectItem>
-              <SelectItem value="townhouse">Townhouse</SelectItem>
-              <SelectItem value="luxury">Luxury Home</SelectItem>
+              <SelectItem value="apartment">Apartment/Wohnung</SelectItem>
+              <SelectItem value="house">House/Haus</SelectItem>
+              <SelectItem value="penthouse">Penthouse</SelectItem>
+              <SelectItem value="maisonette">Maisonette</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -138,7 +148,7 @@ export const PropertyEstimator = () => {
               <span className="text-sm font-medium">Estimated Property Value</span>
             </div>
             <div className="text-3xl font-bold text-accent">
-              ${estimatedValue.toLocaleString('en-US', { maximumFractionDigits: 0 })}
+              €{estimatedValue.toLocaleString('de-DE', { maximumFractionDigits: 0 })}
             </div>
             <div className="text-sm text-muted-foreground">
               Based on current market trends

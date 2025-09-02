@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { MortgageCalculator } from '@/components/MortgageCalculator';
 import { CreditScoreEstimator } from '@/components/CreditScoreEstimator';
 import { PropertyEstimator } from '@/components/PropertyEstimator';
+import { RentalCalculator } from '@/components/RentalCalculator';
 import { 
   Calculator, 
   TrendingUp, 
@@ -14,7 +15,8 @@ import {
   Mail,
   MapPin,
   CheckCircle,
-  Star
+  Star,
+  Building
 } from 'lucide-react';
 import heroImage from '@/assets/hero-finance.jpg';
 
@@ -28,7 +30,7 @@ const Index = () => {
             <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
               <Home className="w-5 h-5 text-primary-foreground" />
             </div>
-            <h1 className="text-xl font-bold text-primary">RealEstimate</h1>
+            <h1 className="text-xl font-bold text-primary">RealEstimate EU</h1>
           </div>
           <nav className="hidden md:flex items-center gap-6">
             <a href="#calculators" className="text-foreground hover:text-primary transition-colors">Calculators</a>
@@ -51,11 +53,11 @@ const Index = () => {
                   Smart Finance
                 </span>
                 <br />
-                for Real Estate
+                for European Real Estate
               </h1>
               <p className="text-xl text-muted-foreground leading-relaxed">
-                Get accurate property estimates, mortgage calculations, and credit assessments. 
-                Make informed real estate decisions with our comprehensive financial tools.
+                Get accurate property estimates, mortgage calculations, and credit assessments for the German and European markets. 
+                Make informed real estate decisions with our comprehensive financial tools designed for European standards.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button variant="hero" size="lg" className="text-lg px-8">
@@ -67,15 +69,15 @@ const Index = () => {
               </div>
               <div className="flex items-center gap-8 pt-4">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-primary">500K+</div>
+                  <div className="text-2xl font-bold text-primary">350K+</div>
                   <div className="text-sm text-muted-foreground">Properties Valued</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-secondary">$2.1B</div>
+                  <div className="text-2xl font-bold text-secondary">€1.5B</div>
                   <div className="text-sm text-muted-foreground">Loans Approved</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-accent">4.9★</div>
+                  <div className="text-2xl font-bold text-accent">4.8★</div>
                   <div className="text-sm text-muted-foreground">Customer Rating</div>
                 </div>
               </div>
@@ -96,16 +98,17 @@ const Index = () => {
       <section id="calculators" className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Financial Calculators</h2>
+            <h2 className="text-4xl font-bold mb-4">European Financial Calculators</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Get instant estimates with our powerful calculation tools
+              Get instant estimates with our powerful calculation tools designed for European markets
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
             <MortgageCalculator />
             <CreditScoreEstimator />
             <PropertyEstimator />
+            <RentalCalculator />
           </div>
         </div>
       </section>
@@ -114,13 +117,13 @@ const Index = () => {
       <section id="services" className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Our Services</h2>
+            <h2 className="text-4xl font-bold mb-4">Our European Services</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Comprehensive financial solutions for all your real estate needs
+              Comprehensive financial solutions for all your European real estate needs
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
             <Card>
               <CardHeader>
                 <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center mb-4">
@@ -200,6 +203,34 @@ const Index = () => {
                   <li className="flex items-center gap-2">
                     <CheckCircle className="w-4 h-4 text-secondary" />
                     <span className="text-sm">Trend forecasting</span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <div className="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center mb-4">
+                  <Building className="w-6 h-6 text-accent" />
+                </div>
+                <CardTitle>Rental Investment</CardTitle>
+                <CardDescription>
+                  Maximize your rental property returns and yields
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-secondary" />
+                    <span className="text-sm">Rental yield analysis</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-secondary" />
+                    <span className="text-sm">ROI calculations</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-secondary" />
+                    <span className="text-sm">Portfolio optimization</span>
                   </li>
                 </ul>
               </CardContent>
@@ -343,7 +374,7 @@ const Index = () => {
                 <li>Mortgage Calculator</li>
                 <li>Credit Estimator</li>
                 <li>Property Estimator</li>
-                <li>Rate Comparison</li>
+                <li>Rental Calculator</li>
               </ul>
             </div>
             <div>

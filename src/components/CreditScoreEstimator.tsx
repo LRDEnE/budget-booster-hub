@@ -21,10 +21,10 @@ export const CreditScoreEstimator = () => {
 
     let baseScore = 650;
 
-    // Income factor
-    if (incomeNum > 100000) baseScore += 50;
-    else if (incomeNum > 70000) baseScore += 30;
-    else if (incomeNum > 50000) baseScore += 10;
+    // European/German income thresholds (in Euros)
+    if (incomeNum > 80000) baseScore += 50;
+    else if (incomeNum > 55000) baseScore += 30;
+    else if (incomeNum > 40000) baseScore += 10;
 
     // Debt to income ratio
     if (debtToIncome < 20) baseScore += 40;
@@ -70,29 +70,29 @@ export const CreditScoreEstimator = () => {
         <div className="mx-auto mb-2 w-12 h-12 bg-gradient-success rounded-full flex items-center justify-center">
           <TrendingUp className="w-6 h-6 text-secondary-foreground" />
         </div>
-        <CardTitle>Credit Score Estimator</CardTitle>
-        <CardDescription>Estimate your creditworthiness</CardDescription>
+        <CardTitle>Credit Score Estimator (EU)</CardTitle>
+        <CardDescription>Estimate your creditworthiness in Europe</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="annual-income">Annual Income</Label>
+          <Label htmlFor="annual-income">Annual Income (€)</Label>
           <Input
             id="annual-income"
             type="number"
             value={income}
             onChange={(e) => setIncome(e.target.value)}
-            placeholder="75,000"
+            placeholder="55,000"
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="monthly-debt">Monthly Debt Payments</Label>
+          <Label htmlFor="monthly-debt">Monthly Debt Payments (€)</Label>
           <Input
             id="monthly-debt"
             type="number"
             value={debt}
             onChange={(e) => setDebt(e.target.value)}
-            placeholder="2,500"
+            placeholder="1,800"
           />
         </div>
 
